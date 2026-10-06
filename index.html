@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THẦY THÁI ĐÀ LẠT - LỚP KHOA HỌC TỰ NHIÊN 6</title>
+    <title>THẦY THÁI ĐÀ LẠT - LỚP KHOA HỌC TỰ NHIÊN 7</title>
     <style>
         * {
             box-sizing: border-box;
@@ -182,7 +182,7 @@
             align-items: center;
             padding: 25px;
             z-index: 20;
-            box-sizing: border-border-box;
+            box-sizing: border-box;
         }
 
         .q-header {
@@ -194,7 +194,7 @@
         }
 
         .q-text {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: #ffffff;
             margin-bottom: 20px;
             max-width: 750px;
@@ -301,7 +301,7 @@
 <body>
 
     <div class="header-bar">
-        <div class="header-title">THẦY THÁI ĐÀ LẠT - LỚP KHOA HỌC TỰ NHIÊN 6</div>
+        <div class="header-title">THẦY THÁI ĐÀ LẠT - LỚP KHOA HỌC TỰ NHIÊN 7</div>
         <div class="header-contact">LIÊN HỆ: 086 2008 917</div>
     </div>
 
@@ -312,21 +312,21 @@
         <div id="hud" class="hidden">
             <div class="hud-card">ĐIỂM: <span id="score-val">0</span></div>
             <div class="hud-card">MẠNG: <span id="lives-val">❤️❤️❤️</span></div>
-            <div class="hud-card">MÔN: <span id="subject-val">Vật Lý</span></div>
+            <div class="hud-card">MÔN: <span id="subject-val">Hóa Học</span></div>
         </div>
 
         <!-- Start Screen -->
         <div id="start-screen" class="screen">
             <h1>ZOMBIE ĂN THỊT</h1>
-            <p class="subtitle">ÔN TẬP KHOA HỌC TỰ NHIÊN 6 - HỌC KỲ 1</p>
+            <p class="subtitle">ÔN TẬP KHOA HỌC TỰ NHIÊN 7 - HỌC KỲ 1</p>
 
             <div class="select-group">
-                <label for="subject-select">CHỌN PHÂN MÔN:</label>
+                <label for="subject-select">CHỌN PHÂN MÔN / CHỦ ĐỀ:</label>
                 <select id="subject-select">
-                    <option value="physics">Vật Lý (Đo lường, Mở đầu)</option>
-                    <option value="chemistry">Hóa Học (Chất, Vật liệu, Hỗn hợp)</option>
-                    <option value="biology">Sinh Học (Tế bào, Cơ thể)</option>
-                    <option value="all">Tổng Hợp (Tất cả 3 phân môn)</option>
+                    <option value="chemistry">Hóa Học (Nguyên tử, Bảng tuần hoàn, Liên kết)</option>
+                    <option value="physics">Vật Lý (Tốc độ & Âm thanh)</option>
+                    <option value="biology">Sinh Học (Trao đổi chất & Chuyển hóa năng lượng)</option>
+                    <option value="all">Tổng Hợp (Tất cả chủ đề KHTN 7)</option>
                 </select>
             </div>
 
@@ -344,7 +344,7 @@
 
         <!-- Question Modal -->
         <div id="question-modal" class="hidden">
-            <div class="q-header" id="q-subject-tag">PHÂN MÔN VẬT LÝ</div>
+            <div class="q-header" id="q-subject-tag">PHÂN MÔN HÓA HỌC</div>
             <div class="q-text" id="q-text">Nội dung câu hỏi sẽ hiển thị ở đây?</div>
             <div class="options-grid" id="options-container">
                 <!-- Direct buttons inserted dynamically -->
@@ -365,63 +365,63 @@
     </div>
 
     <script>
-        // --- NÂN CẤP CƠ SỞ DỮ LIỆU CÂU HỎI KHTN 6 (KẾT NỐI TRI THỨC) ---
+        // --- NGÂN HÀNG CÂU HỎI KHTN 7 (KẾT NỐI TRI THỨC - HK1) ---
         const questionBank = {
-            physics: {
-                easy: [
-                    { q: "Đơn vị đo độ dài chính thức trong hệ thống đo lường của nước ta là gì?", opts: ["Milimét (mm)", "Mét (m)", "Centimét (cm)", "Kilômét (km)"], a: 1 },
-                    { q: "Dụng cụ dùng để đo khối lượng của một vật là gì?", opts: ["Thước dây", "Nhiệt kế", "Cân", "Bình chia độ"], a: 2 },
-                    { q: "Đơn vị đo thời gian trong hệ đo lường hợp pháp của Việt Nam là gì?", opts: ["Giây (s)", "Phút (min)", "Giờ (h)", "Ngày"], a: 0 },
-                    { q: "Dụng cụ dùng để đo nhiệt độ là gì?", opts: ["Lực kế", "Nhiệt kế", "Cân đồng hồ", "Thước kẹp"], a: 1 }
-                ],
-                medium: [
-                    { q: "Khi dùng thước đo độ dài, ta cần đặt thước như thế nào?", opts: ["Đặt lệch so với chiều dài cần đo", "Đặt dọc theo chiều dài cần đo, vạch số 0 trùng một đầu của vật", "Đặt tùy ý", "Đặt ở bất kỳ vạch nào trùng đầu vật"], a: 1 },
-                    { q: "Giới hạn đo (GHĐ) của thước là gì?", opts: ["Khoảng cách giữa 2 vạch chia liên tiếp", "Chiều dài lớn nhất ghi trên thước", "Chiều dài nhỏ nhất ghi trên thước", "Độ rộng của thước"], a: 1 },
-                    { q: "Độ chia nhỏ nhất (ĐCNN) của thước là gì?", opts: ["Chiều dài giữa 2 vạch chia liên tiếp trên thước", "Vạch chia nhỏ nhất trên thước", "Chiều dài nhỏ nhất ghi trên thước", "Giá trị nhỏ nhất ghi trên thước"], a: 0 },
-                    { q: "Để đo thời gian chạy 100m của học sinh, ta nên dùng loại đồng hồ nào?", opts: ["Đồng hồ treo tường", "Đồng hồ cát", "Đồng hồ bấm giây", "Đồng hồ đeo tay thông thường"], a: 2 }
-                ],
-                hard: [
-                    { q: "Một bình chia độ đang chứa 50cm³ nước. Thả chìm một viên đá vào bình thì nước dâng lên vạch 85cm³. Thể tích viên đá là bao nhiêu?", opts: ["135 cm³", "50 cm³", "35 cm³", "85 cm³"], a: 2 },
-                    { q: "Thang nhiệt độ Celsius quy định nhiệt độ của nước đá đang tan và hơi nước đang sôi lần lượt là:", opts: ["0°C và 100°C", "32°F và 212°F", "100°C và 0°C", "0°K và 100°K"], a: 0 },
-                    { q: "Thực hành đo khối lượng túi hoa quả bằng cân đồng hồ, thao tác nào sau đây KHÔNG đúng?", opts: ["Đặt cân trên bề mặt bằng phẳng", "Hiệu chỉnh kim cân về vạch số 0", "Mắt nhìn lệch so với kim cân", "Đặt vật cẩn thận lên đĩa cân"], a: 2 }
-                ]
-            },
             chemistry: {
                 easy: [
-                    { q: "Chất nào sau đây tồn tại ở thể khí trong điều kiện thường?", opts: ["Nước", "Sắt", "Khí Oxygen", "Đường"], a: 2 },
-                    { q: "Vật thể nào sau đây là vật thể tự nhiên?", opts: ["Cái bàn gỗ", "Quả núi", "Chiếc xe đạp", "Cái cốc thủy tinh"], a: 1 },
-                    { q: "Khí nào chiếm khoảng 21% thể tích không khí?", opts: ["Nitrogen", "Carbon dioxide", "Oxygen", "Hydrogen"], a: 2 },
-                    { q: "Vật liệu nào sau đây thường được dùng để dẫn điện?", opts: ["Nhựa", "Thủy tinh", "Đồng", "Gỗ khô"], a: 2 }
+                    { q: "Nguyên tử được cấu tạo từ những hạt nào?", opts: ["Proton và electron", "Proton và neutron", "Proton, neutron và electron", "Chỉ có hạt electron"], a: 2 },
+                    { q: "Hạt mang điện tích dương nằm trong hạt nhân nguyên tử là hạt nào?", opts: ["Electron", "Neutron", "Proton", "Phân tử"], a: 2 },
+                    { q: "Hạt không mang điện nằm trong hạt nhân nguyên tử là hạt nào?", opts: ["Proton", "Neutron", "Electron", "Ion"], a: 1 },
+                    { q: "Các nguyên tố hóa học trong bảng tuần hoàn được sắp xếp theo chiều tăng dần của yếu tố nào?", opts: ["Khối lượng nguyên tử", "Điện tích hạt nhân", "Số lượng neutron", "Bán kính nguyên tử"], a: 1 }
                 ],
                 medium: [
-                    { q: "Hành động nào sau đây biểu hiện tính chất hóa học của chất?", opts: ["Nước hoa quả đông lại thành đá", "Đốt cháy que củi thành than", "Hòa tan đường vào nước", "Mặt trời làm khô quần áo"], a: 1 },
-                    { q: "Để tách muối ăn ra khỏi dung dịch nước muối, người ta dùng phương pháp nào?", opts: ["Lọc", "Cô cạn (Bốc hơi)", "Dùng nam thạch", "Lắng"], a: 1 },
-                    { q: "Hỗn hợp nào sau đây là hỗn hợp đồng nhất?", opts: ["Nước và dầu ăn", "Nước đường", "Nước và cát", "Hỗn hợp xi măng và nước"], a: 1 },
-                    { q: "Quá trình chuyển từ thể rắn sang thể lỏng gọi là gì?", opts: ["Sự nóng chảy", "Sự đông đặc", "Sự bay hơi", "Sự ngưng tụ"], a: 0 }
+                    { q: "Bảng tuần hoàn các nguyên tố hóa học gồm có bao nhiêu chu kì?", opts: ["5 chu kì", "6 chu kì", "7 chu kì", "8 chu kì"], a: 2 },
+                    { q: "Trong nguyên tử hòa điện về điện, số hạt proton luôn bằng số hạt nào?", opts: ["Hạt neutron", "Hạt electron", "Tổng số hạt nhân", "Khối lượng nguyên tử"], a: 1 },
+                    { q: "Các nguyên tố trong cùng một nhóm A trong bảng tuần hoàn có đặc điểm nào giống nhau?", opts: ["Số lớp electron", "Số electron ở lớp ngoài cùng", "Số proton", "Khối lượng nguyên tử"], a: 1 },
+                    { q: "Hạt đại diện cho chất, gồm một số nguyên tử liên kết với nhau và thể hiện đầy đủ tính chất hóa học của chất là gì?", opts: ["Nguyên tử", "Phân tử", "Hạt nhân", "Proton"], a: 1 }
                 ],
                 hard: [
-                    { q: "Phương pháp lọc dùng để tách riêng các chất ra khỏi hỗn hợp nào?", opts: ["Chất rắn tan trong chất lỏng", "Chất rắn không tan trong chất lỏng", "Hai chất lỏng hòa tan vào nhau", "Các chất khí khác nhau"], a: 1 },
-                    { q: "Khí nào gây nên hiện tượng hiệu ứng nhà kính và biến đổi khí hậu?", opts: ["Oxygen", "Nitrogen", "Carbon dioxide (CO2)", "Argon"], a: 2 },
-                    { q: "Thành phần phần trăm thể tích của khí Nitrogen trong không khí xấp xỉ là bao nhiêu?", opts: ["21%", "78%", "1%", "0.03%"], a: 1 }
+                    { q: "Khi các nguyên tử kim loại liên kết với các nguyên tử phi kim, loại liên kết nào thường được hình thành?", opts: ["Liên kết cộng hóa trị", "Liên kết ion", "Liên kết kim loại", "Liên kết phi kim"], a: 1 },
+                    { q: "Liên kết cộng hóa trị là liên kết được hình thành do yếu tố nào giữa các nguyên tử?", opts: ["Sự cho và nhận electron", "Sự dùng chung một hay nhiều cặp electron", "Lực hút tĩnh điện giữa các ion", "Sự trao đổi các hạt neutron"], a: 1 },
+                    { q: "Một nguyên tử có 8 proton trong hạt nhân. Số electron ở lớp ngoài cùng của nguyên tử này là bao nhiêu?", opts: ["2 electron", "6 electron", "8 electron", "4 electron"], a: 1 }
+                ]
+            },
+            physics: {
+                easy: [
+                    { q: "Công thức tính tốc độ chuyển động là gì (v: tốc độ, s: quãng đường, t: thời gian)?", opts: ["v = s . t", "v = s / t", "v = t / s", "v = s + t"], a: 1 },
+                    { q: "Đơn vị đo tốc độ thường dùng trong hệ đo lường hợp pháp là gì?", opts: ["m/s và km/h", "m/phút và cm/s", "km/s và m/h", "mm/s và km/phút"], a: 0 },
+                    { q: "Âm thanh được tạo ra từ đâu?", opts: ["Từ các vật đứng yên", "Từ các vật đang dao động", "Từ các vật bị nung nóng", "Từ các vật chiếu sáng"], a: 1 },
+                    { q: "Số dao động trong một giây gọi là gì?", opts: ["Độ to của âm", "Tần số dao động", "Biên độ dao động", "Tốc độ truyền âm"], a: 1 }
+                ],
+                medium: [
+                    { q: "Đơn vị đo tần số dao động là gì?", opts: ["Đềxiben (dB)", "Mát trên giây (m/s)", "Héc (Hz)", "Giây (s)"], a: 2 },
+                    { q: "Âm truyền nhanh nhất trong môi trường nào sau đây?", opts: ["Môi trường chất khí", "Môi trường chất lỏng", "Môi trường chất rắn", "Môi trường chân không"], a: 2 },
+                    { q: "Âm thanh KHÔNG thể truyền qua môi trường nào?", opts: ["Nước biển", "Thanh thép", "Không khí", "Chân không"], a: 3 },
+                    { q: "Một ô đi được quãng đường 60 km trong thời gian 1.5 giờ. Tốc độ của ô tô là bao nhiêu?", opts: ["40 km/h", "90 km/h", "45 km/h", "50 km/h"], a: 0 }
+                ],
+                hard: [
+                    { q: "Độ to của âm phụ thuộc vào yếu tố nào của dao động?", opts: ["Tần số dao động", "Biên độ dao động", "Thời gian dao động", "Môi trường truyền âm"], a: 1 },
+                    { q: "Âm có tần số lớn hơn 20 000 Hz được gọi là gì?", opts: ["Hạ âm", "Âm nghe được", "Siêu âm", "Tiếng ồn"], a: 2 },
+                    { q: "Một người nhìn thấy tia sét trước khi nghe thấy tiếng sấm 3 giây. Biết tốc độ truyền âm trong không khí là 340 m/s. Khoảng cách từ người đó đến nơi có sét là:", opts: ["1020 m", "680 m", "113 m", "340 m"], a: 0 }
                 ]
             },
             biology: {
                 easy: [
-                    { q: "Đơn vị cơ sở cấu tạo nên mọi cơ thể sống là gì?", opts: ["Mô", "Tế bào", "Cơ quan", "Hệ cơ quan"], a: 1 },
-                    { q: "Dụng cụ nào giúp chúng ta quan sát rõ cấu tạo của tế bào?", opts: ["Kính kính lặp", "Kính hiển vi quang học", "Kính râm", "Thước phóng đại"], a: 1 },
-                    { q: "Thành phần nào điều khiển mọi hoạt động sống của tế bào?", opts: ["Màng tế bào", "Tế bào chất", "Nhân tế bào (hoặc vùng nhân)", "Không bào"], a: 2 },
-                    { q: "Cơ thể nào sau đây là cơ thể đơn bào?", opts: ["Con người", "Cây bàng", "Trùng roi", "Con mèo"], a: 2 }
+                    { q: "Tập hợp các quá trình thu nhận, biến đổi và sử dụng các chất từ môi trường gọi là gì?", opts: ["Trao đổi chất", "Chuyển hóa năng lượng", "Cảm ứng", "Sinh trưởng"], a: 0 },
+                    { q: "Quá trình quang hợp ở thực vật diễn ra chủ yếu ở cơ quan nào?", opts: ["Rễ cây", "Thân cây", "Lá cây", "Hoa"], a: 2 },
+                    { q: "Sản phẩm của quá trình quang hợp ở thực vật gồm những gì?", opts: ["Nước và Carbon dioxide", "Glucose (Chất hữu cơ) và Oxygen", "Glucose và Carbon dioxide", "Oxygen và Nước"], a: 1 },
+                    { q: "Quá trình hô hấp tế bào có vai trò chính là gì?", opts: ["Tạo ra chất dinh dưỡng", "Giải phóng năng lượng (ATP) cho hoạt động sống", "Tổng hợp khí Oxygen", "Hấp thụ ánh sáng mặt trời"], a: 1 }
                 ],
                 medium: [
-                    { q: "Điểm khác biệt lớn nhất giữa tế bào thực vật và tế bào động vật là gì?", opts: ["Tế bào thực vật có màng sinh chất", "Tế bào thực vật có lục lạp và thành tế bào", "Tế bào động vật có nhân", "Tế bào thực vật không có tế bào chất"], a: 1 },
-                    { q: "Sự lớn lên và phân chia của tế bào có ý nghĩa gì đối với sinh vật?", opts: ["Giúp cơ thể sinh sản", "Giúp cơ thể lớn lên và thay thế tế bào già/hỏng", "Tăng khối lượng nước trong cơ thể", "Giúp cơ thể đổi màu"], a: 1 },
-                    { q: "Tập hợp các tế bào giống nhau cùng thực hiện một chức năng nhất định tạo thành gì?", opts: ["Cơ quan", "Mô", "Hệ cơ quan", "Cơ thể"], a: 1 },
-                    { q: "Cơ quan nào sau đây thuộc hệ tuần hoàn ở người?", opts: ["Dạ dày", "Phổi", "Tim", "Thận"], a: 2 }
+                    { q: "Bào quan nào là nơi diễn ra quá trình quang hợp ở tế bào thực vật?", opts: ["Ty thể", "Lục lạp", "Nhân tế bào", "Không bào"], a: 1 },
+                    { q: "Bào quan nào đóng vai trò là 'nhà máy năng lượng' diễn ra hô hấp tế bào?", opts: ["Ty thể", "Lục lạp", "Màng sinh chất", "Lưới nội chất"], a: 0 },
+                    { q: "Yếu tố nào sau đây KHÔNG phải là nguyên liệu của quá trình quang hợp?", opts: ["Nước", "Khí Carbon dioxide", "Ánh sáng mặt trời", "Khí Oxygen"], a: 3 },
+                    { q: "Khí nào được hấp thụ trong quá trình hô hấp tế bào ở sinh vật?", opts: ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"], a: 1 }
                 ],
                 hard: [
-                    { q: "Sắp xếp các cấp tổ chức của cơ thể đa bào từ nhỏ đến lớn:", opts: ["Tế bào -> Cơ quan -> Mô -> Hệ cơ quan -> Cơ thể", "Tế bào -> Mô -> Cơ quan -> Hệ cơ quan -> Cơ thể", "Mô -> Tế bào -> Cơ quan -> Hệ cơ quan -> Cơ thể", "Tế bào -> Mô -> Hệ cơ quan -> Cơ quan -> Cơ thể"], a: 1 },
-                    { q: "Thành phần nào của tế bào là nơi diễn ra các hoạt động sống cơ bản như hô hấp, tổng hợp chất?", opts: ["Nhân tế bào", "Tế bào chất", "Màng tế bào", "Thành tế bào"], a: 1 },
-                    { q: "Một tế bào sau 3 lần phân chia liên tiếp sẽ tạo ra bao nhiêu tế bào con?", opts: ["3 tế bào", "6 tế bào", "8 tế bào", "16 tế bào"], a: 2 }
+                    { q: "Quang hợp và hô hấp tế bào có mối quan hệ với nhau như thế nào?", opts: ["Độc lập và không liên quan", "Ngược chiều nhưng phụ thuộc lẫn nhau", "Giống hệt nhau về nguyên liệu và sản phẩm", "Chỉ xảy ra đồng thời vào ban đêm"], a: 1 },
+                    { q: "Nước và muối khoáng từ đất được vận chuyển lên lá cây nhờ mô nào?", opts: ["Mô rây", "Mô gỗ", "Mô biểu bì", "Mô cơ"], a: 1 },
+                    { q: "Các chất hữu cơ tổng hợp từ lá được vận chuyển đến các bộ phận khác của cây nhờ cấu trúc nào?", opts: ["Mạch gỗ", "Mạch rây", "Lông hút", "Khí khổng"], a: 1 }
                 ]
             }
         };
@@ -435,7 +435,8 @@
         let lives = 3;
         let activeZombies = [];
         let bullets = [];
-        let currentSubject = "physics";
+        let explosions = [];
+        let currentSubject = "chemistry";
         let currentDifficulty = "medium";
         let spawnTimer = null;
         let activeQuestionZombie = null;
@@ -505,29 +506,47 @@
             // Update & Draw Bullets
             for (let i = bullets.length - 1; i >= 0; i--) {
                 let b = bullets[i];
-                b.x += b.speed;
+                
+                // Di chuyển đạn về phía mục tiêu
+                let dx = b.targetX - b.x;
+                let dy = b.targetY - b.y;
+                let dist = Math.hypot(dx, dy);
+
+                if (dist < 15) {
+                    // Đạn trúng zombie -> Xóa zombie và đạn
+                    createExplosion(b.targetX, b.targetY);
+                    activeZombies = activeZombies.filter(z => z.id !== b.zombieId);
+                    bullets.splice(i, 1);
+                    continue;
+                }
+
+                b.x += (dx / dist) * b.speed;
+                b.y += (dy / dist) * b.speed;
 
                 ctx.fillStyle = "#ffaa00";
                 ctx.beginPath();
-                ctx.arc(b.x, b.y, 6, 0, Math.PI * 2);
+                ctx.arc(b.x, b.y, 7, 0, Math.PI * 2);
                 ctx.fill();
+            }
 
-                // Bullet hits target zombie
-                if (b.targetZombie) {
-                    let dist = Math.hypot(b.x - b.targetZombie.x, b.y - b.targetZombie.y);
-                    if (dist < b.targetZombie.radius) {
-                        // Explosion effect
-                        createExplosion(b.targetZombie.x, b.targetZombie.y);
-                        // Remove zombie
-                        activeZombies = activeZombies.filter(z => z !== b.targetZombie);
-                        bullets.splice(i, 1);
-                        continue;
-                    }
+            // Update & Draw Explosions
+            for (let i = explosions.length - 1; i >= 0; i--) {
+                let ex = explosions[i];
+                ex.radius += 2;
+                ex.alpha -= 0.05;
+
+                if (ex.alpha <= 0) {
+                    explosions.splice(i, 1);
+                    continue;
                 }
 
-                if (b.x > canvas.width) {
-                    bullets.splice(i, 1);
-                }
+                ctx.save();
+                ctx.globalAlpha = ex.alpha;
+                ctx.fillStyle = "#ff6b00";
+                ctx.beginPath();
+                ctx.arc(ex.x, ex.y, ex.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
             }
 
             // Update & Draw Zombies
@@ -542,11 +561,10 @@
                 ctx.fill();
 
                 // Zombie Eyes
-                ctx.fillStyle = "#red";
+                ctx.fillStyle = "#ff0000";
                 ctx.beginPath();
                 ctx.arc(z.x - 8, z.y - 5, 4, 0, Math.PI * 2);
                 ctx.arc(z.x - 8, z.y + 5, 4, 0, Math.PI * 2);
-                ctx.fillStyle = "#ff0000";
                 ctx.fill();
 
                 // Zombie Label
@@ -569,13 +587,12 @@
             requestAnimationFrame(animate);
         }
 
-        // Particle Explosions
-        let particles = [];
         function createExplosion(x, y) {
-            // Visual feedback handled gracefully
+            explosions.push({ x: x, y: y, radius: 10, alpha: 1.0 });
         }
 
         // Spawn Zombie Function
+        let zombieIdCounter = 0;
         function spawnZombie() {
             if (!gameRunning) return;
 
@@ -584,6 +601,7 @@
             const yPos = Math.random() * (canvas.height - 100) + 50;
 
             const newZombie = {
+                id: zombieIdCounter++,
                 x: canvas.width + 30,
                 y: yPos,
                 radius: 22,
@@ -605,7 +623,7 @@
             // Find clicked zombie
             for (let z of activeZombies) {
                 let dist = Math.hypot(clickX - z.x, clickY - z.y);
-                if (dist <= z.radius + 15) { // Enhanced touch/click area
+                if (dist <= z.radius + 15) {
                     triggerQuestion(z);
                     break;
                 }
@@ -620,8 +638,8 @@
             let pool = [];
             if (currentSubject === "all") {
                 pool = [
-                    ...questionBank.physics[currentDifficulty],
                     ...questionBank.chemistry[currentDifficulty],
+                    ...questionBank.physics[currentDifficulty],
                     ...questionBank.biology[currentDifficulty]
                 ];
             } else {
@@ -643,7 +661,6 @@
                 btn.className = "opt-btn";
                 btn.innerHTML = `<span class="opt-prefix">${prefixes[idx]}</span> ${optText}`;
                 
-                // Direct click binding
                 btn.onclick = function() {
                     handleAnswer(idx === qData.a);
                 };
@@ -660,19 +677,21 @@
             document.getElementById("question-modal").classList.add("hidden");
 
             if (isCorrect && activeQuestionZombie) {
-                // Shoot Bullet at Zombie
+                // Tạo viên đạn bắn chính xác vị trí zombie hiện tại
                 bullets.push({
-                    x: player.x + 30,
+                    x: player.x + 35,
                     y: player.y,
-                    speed: 12,
-                    targetZombie: activeQuestionZombie
+                    targetX: activeQuestionZombie.x,
+                    targetY: activeQuestionZombie.y,
+                    zombieId: activeQuestionZombie.id,
+                    speed: 20
                 });
 
                 score += (currentDifficulty === "easy" ? 10 : currentDifficulty === "medium" ? 20 : 30);
                 correctAnswersCount++;
                 updateHUD();
             } else {
-                // Wrong answer penalty: Zombie speeds up!
+                // Trả lời sai: Zombie tăng tốc
                 if (activeQuestionZombie) {
                     activeQuestionZombie.speed += 1.0;
                     activeQuestionZombie.color = "#e76f51";
@@ -684,10 +703,10 @@
         // Helpers
         function getSubjectName(sub) {
             switch(sub) {
-                case "physics": return "VẬT LÝ 6";
-                case "chemistry": return "HÓA HỌC 6";
-                case "biology": return "SINH HỌC 6";
-                default: return "TỔNG HỢP KHTN 6";
+                case "chemistry": return "HÓA HỌC 7";
+                case "physics": return "VẬT LÝ 7";
+                case "biology": return "SINH HỌC 7";
+                default: return "TỔNG HỢP KHTN 7";
             }
         }
 
@@ -710,6 +729,7 @@
             correctAnswersCount = 0;
             activeZombies = [];
             bullets = [];
+            explosions = [];
             gameRunning = true;
 
             document.getElementById("start-screen").classList.add("hidden");
