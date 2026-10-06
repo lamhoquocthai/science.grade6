@@ -3,1143 +3,753 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZOMBIE ĂN THỊT - ÔN TẬP KHTN 6 | THẦY THÁI ĐÀ LẠT</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700;900&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brandOrange: '#FF7A00',
-                        brandOrangeDark: '#E05500',
-                        brandBlueDark: '#0E2A47',
-                        brandBlue: '#0047AB',
-                        brandCyan: '#00B4DB',
-                        zombieGreen: '#2EE59D',
-                    },
-                    fontFamily: {
-                        sans: ['Nunito', 'sans-serif'],
-                        game: ['Chakra Petch', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <title>THẦY THÁI ĐÀ LẠT - LỚP KHOA HỌC TỰ NHIÊN 6</title>
     <style>
-        body {
-            font-family: 'Nunito', sans-serif;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             user-select: none;
             -webkit-user-select: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .font-game { font-family: 'Chakra Petch', sans-serif; }
-        .gradient-orange { background: linear-gradient(135deg, #FF7A00 0%, #FF3D00 100%); }
-        .gradient-blue { background: linear-gradient(135deg, #0E2A47 0%, #0047AB 100%); }
-        .gradient-cyan { background: linear-gradient(135deg, #00B4DB 0%, #0083B0 100%); }
-        .glass-panel {
-            background: rgba(14, 42, 71, 0.85);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(0, 180, 219, 0.3);
+
+        body {
+            background-color: #0b132b;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
         }
-        .pulse-slow { animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+
+        /* Header Branding */
+        .header-bar {
+            width: 100%;
+            max-width: 900px;
+            background: linear-gradient(135deg, #ff6b00 0%, #0055ff 100%);
+            color: white;
+            text-align: center;
+            padding: 12px 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        /* Custom scrollbar for question modal */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0E2A47; }
-        ::-webkit-scrollbar-thumb { background: #FF7A00; border-radius: 4px; }
+
+        .header-title {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+
+        .header-contact {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Game Container */
+        #game-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 550px;
+            background-color: #1c2541;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            border: 2px solid #0055ff;
+            border-top: none;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Screens overlays */
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(11, 19, 43, 0.95);
+            padding: 20px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h1 {
+            color: #ff6b00;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+        }
+
+        p.subtitle {
+            color: #00d4ff;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        /* Form elements */
+        .select-group {
+            margin: 10px 0;
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffaa00;
+            font-weight: 600;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 2px solid #0055ff;
+            background-color: #0b132b;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: #ff6b00;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b00, #ff8c00);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.6);
+            background: linear-gradient(45deg, #ff8c00, #ff6b00);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Question Overlay */
+        #question-modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 19, 43, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            z-index: 20;
+            box-sizing: border-border-box;
+        }
+
+        .q-header {
+            color: #00d4ff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .q-text {
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            max-width: 750px;
+            line-height: 1.4;
+            background: rgba(0, 85, 255, 0.2);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b00;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        @media (max-width: 600px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .opt-btn {
+            background-color: #1c2541;
+            color: white;
+            border: 2px solid #0055ff;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .opt-btn:hover {
+            background-color: #0055ff;
+            border-color: #ff6b00;
+        }
+
+        .opt-btn .opt-prefix {
+            background-color: #ff6b00;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* HUD Overlay */
+        #hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .hud-card {
+            background: rgba(11, 19, 43, 0.8);
+            border: 1px solid #0055ff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hud-card span {
+            color: #ff6b00;
+        }
+
+        /* Result Screen */
+        .score-big {
+            font-size: 3rem;
+            color: #ff6b00;
+            font-weight: bold;
+            margin: 15px 0;
+            text-shadow: 0 0 15px rgba(255, 107, 0, 0.5);
+        }
+
+        .stats {
+            font-size: 1.1rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
+<body>
 
-    <!-- HEADER BRANDING -->
-    <header class="bg-gradient-to-r from-brandBlueDark via-brandBlue to-brandBlueDark text-white border-b-4 border-brandOrange py-2 px-4 shadow-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-2">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-brandOrange flex items-center justify-center font-black text-xl text-white shadow-lg border-2 border-yellow-300">
-                    <i class="fa-solid font-game fa-flask"></i>
-                </div>
-                <div>
-                    <h1 class="font-game font-extrabold text-lg md:text-xl tracking-wider text-yellow-300 uppercase leading-none">
-                        THẦY THÁI ĐÀ LẠT - LỚP KHOA HỌC TỰ NHIÊN 6
-                    </h1>
-                    <p class="text-xs text-cyan-200 font-semibold mt-0.5">
-                        <i class="fa-solid fa-graduation-cap text-brandOrange"></i> Ôn Tập Kiểm Tra Học Kỳ 1 - Sách Kết Nối Tri Thức Với Cuộc Sống
-                    </p>
-                </div>
+    <div class="header-bar">
+        <div class="header-title">THẦY THÁI ĐÀ LẠT - LỚP KHOA HỌC TỰ NHIÊN 6</div>
+        <div class="header-contact">LIÊN HỆ: 086 2008 917</div>
+    </div>
+
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- HUD In-game -->
+        <div id="hud" class="hidden">
+            <div class="hud-card">ĐIỂM: <span id="score-val">0</span></div>
+            <div class="hud-card">MẠNG: <span id="lives-val">❤️❤️❤️</span></div>
+            <div class="hud-card">MÔN: <span id="subject-val">Vật Lý</span></div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+            <h1>ZOMBIE ĂN THỊT</h1>
+            <p class="subtitle">ÔN TẬP KHOA HỌC TỰ NHIÊN 6 - HỌC KỲ 1</p>
+
+            <div class="select-group">
+                <label for="subject-select">CHỌN PHÂN MÔN:</label>
+                <select id="subject-select">
+                    <option value="physics">Vật Lý (Đo lường, Mở đầu)</option>
+                    <option value="chemistry">Hóa Học (Chất, Vật liệu, Hỗn hợp)</option>
+                    <option value="biology">Sinh Học (Tế bào, Cơ thể)</option>
+                    <option value="all">Tổng Hợp (Tất cả 3 phân môn)</option>
+                </select>
             </div>
-            <div class="flex items-center gap-4">
-                <a href="tel:0862008917" class="bg-brandOrange hover:bg-brandOrangeDark text-white font-black px-4 py-1.5 rounded-full text-xs md:text-sm flex items-center gap-2 shadow-lg hover:scale-105 transition duration-200 border border-yellow-300">
-                    <i class="fa-solid fa-phone-volume animate-bounce"></i> HOTLINE: 086 2008 917
-                </a>
-                <button id="soundToggleBtn" onclick="toggleAudio()" class="bg-slate-800 hover:bg-slate-700 text-cyan-400 p-2 rounded-full text-sm border border-cyan-500/40 transition">
-                    <i id="soundIcon" class="fa-solid fa-volume-high"></i>
-                </button>
+
+            <div class="select-group">
+                <label for="difficulty-select">CHỌN MỨC ĐỘ / TỐC ĐỘ:</label>
+                <select id="difficulty-select">
+                    <option value="easy">Chậm - Câu hỏi Cơ Bản</option>
+                    <option value="medium" selected>Vừa - Câu hỏi Trung Bình</option>
+                    <option value="hard">Nhanh - Câu hỏi Thử Thách</option>
+                </select>
+            </div>
+
+            <button class="btn" id="start-btn">BẮT ĐẦU CHƠI</button>
+        </div>
+
+        <!-- Question Modal -->
+        <div id="question-modal" class="hidden">
+            <div class="q-header" id="q-subject-tag">PHÂN MÔN VẬT LÝ</div>
+            <div class="q-text" id="q-text">Nội dung câu hỏi sẽ hiển thị ở đây?</div>
+            <div class="options-grid" id="options-container">
+                <!-- Direct buttons inserted dynamically -->
             </div>
         </div>
-    </header>
 
-    <!-- MAIN CONTAINER -->
-    <main class="flex-grow flex items-center justify-center p-2 sm:p-4 relative">
-        <div id="appContainer" class="w-full max-w-5xl bg-brandBlueDark/90 rounded-2xl shadow-2xl border-2 border-brandCyan/40 overflow-hidden relative min-h-[580px] flex flex-col">
-
-            <!-- 1. START SCREEN -->
-            <div id="startScreen" class="absolute inset-0 z-30 flex flex-col items-center justify-between p-6 bg-gradient-to-b from-brandBlueDark via-slate-900 to-black overflow-y-auto">
-                <div class="text-center my-auto w-full max-w-3xl">
-                    <div class="inline-block bg-brandOrange/20 border border-brandOrange text-brandOrange px-4 py-1 rounded-full text-sm font-bold mb-3 uppercase tracking-widest">
-                        <i class="fa-solid fa-biohazard"></i> Game Ôn Tập Kiến Thức KHTN 6
-                    </div>
-                    <h2 class="font-game text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-brandOrange to-red-500 mb-2 drop-shadow-md uppercase tracking-wide">
-                        ZOMBIE ĂN THỊT
-                    </h2>
-                    <p class="text-slate-300 text-sm sm:text-base font-semibold mb-6 max-w-xl mx-auto">
-                        Sử dụng tri thức Khoa Học Tự Nhiên 6 để phóng năng lượng tiêu diệt Zombie, bảo vệ bản thân và chinh phục điểm số cao nhất cùng Thầy Thái Đà Lạt!
-                    </p>
-
-                    <!-- Subjects Selection -->
-                    <div class="mb-6">
-                        <label class="block text-cyan-300 font-game font-bold text-sm uppercase mb-2">
-                            <i class="fa-solid fa-book-open text-brandOrange"></i> Chọn Phân Môn Ôn Tập:
-                        </label>
-                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 text-left">
-                            <button onclick="selectSubject('all')" id="subj-all" class="subject-btn active p-3 rounded-xl border-2 border-brandOrange bg-brandOrange/20 font-bold text-xs sm:text-sm text-yellow-300 flex flex-col items-center justify-center gap-1 transition">
-                                <i class="fa-solid fa-cubes text-xl text-yellow-400"></i>
-                                <span>TẤT CẢ PHÂN MÔN</span>
-                            </button>
-                            <button onclick="selectSubject('vatly')" id="subj-vatly" class="subject-btn p-3 rounded-xl border-2 border-slate-700 bg-slate-800/80 font-bold text-xs sm:text-sm text-cyan-300 flex flex-col items-center justify-center gap-1 hover:border-brandCyan transition">
-                                <i class="fa-solid fa-atom text-xl text-cyan-400"></i>
-                                <span>VẬT LÝ & KHTN (Ch.1)</span>
-                            </button>
-                            <button onclick="selectSubject('hoahoc')" id="subj-hoahoc" class="subject-btn p-3 rounded-xl border-2 border-slate-700 bg-slate-800/80 font-bold text-xs sm:text-sm text-green-300 flex flex-col items-center justify-center gap-1 hover:border-green-400 transition">
-                                <i class="fa-solid fa-flask-vial text-xl text-green-400"></i>
-                                <span>HÓA HỌC (Ch.2,3,4)</span>
-                            </button>
-                            <button onclick="selectSubject('sinhhoc')" id="subj-sinhhoc" class="subject-btn p-3 rounded-xl border-2 border-slate-700 bg-slate-800/80 font-bold text-xs sm:text-sm text-pink-300 flex flex-col items-center justify-center gap-1 hover:border-pink-400 transition">
-                                <i class="fa-solid fa-dna text-xl text-pink-400"></i>
-                                <span>SINH HỌC (Ch.5,6)</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Difficulty Selection -->
-                    <div class="mb-8">
-                        <label class="block text-cyan-300 font-game font-bold text-sm uppercase mb-2">
-                            <i class="fa-solid fa-gauge-high text-brandOrange"></i> Chọn Tốc Độ & Mức Độ Cấp Độ Game:
-                        </label>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <button onclick="selectDifficulty('easy')" id="diff-easy" class="diff-btn active p-3 rounded-xl border-2 border-green-500 bg-green-950/40 text-green-300 font-bold text-xs sm:text-sm hover:scale-105 transition flex flex-col items-center gap-1">
-                                <span class="font-game text-base font-extrabold text-green-400">MỨC ĐỘ DỄ</span>
-                                <span class="text-xs font-normal text-slate-300">Zombie đi chậm | 20s/câu</span>
-                                <span class="bg-green-500/20 px-2 py-0.5 rounded text-[10px] text-green-300">Câu hỏi Nhận biết</span>
-                            </button>
-                            <button onclick="selectDifficulty('medium')" id="diff-medium" class="diff-btn p-3 rounded-xl border-2 border-slate-700 bg-slate-900/60 text-yellow-300 font-bold text-xs sm:text-sm hover:scale-105 transition flex flex-col items-center gap-1">
-                                <span class="font-game text-base font-extrabold text-yellow-400">TRUNG BÌNH</span>
-                                <span class="text-xs font-normal text-slate-300">Tốc độ vừa | 15s/câu</span>
-                                <span class="bg-yellow-500/20 px-2 py-0.5 rounded text-[10px] text-yellow-300">Câu hỏi Thông hiểu</span>
-                            </button>
-                            <button onclick="selectDifficulty('hard')" id="diff-hard" class="diff-btn p-3 rounded-xl border-2 border-slate-700 bg-slate-900/60 text-red-400 font-bold text-xs sm:text-sm hover:scale-105 transition flex flex-col items-center gap-1">
-                                <span class="font-game text-base font-extrabold text-red-500">MỨC ĐỘ KHÓ</span>
-                                <span class="text-xs font-normal text-slate-300">Zombie lao nhanh | 10s/câu</span>
-                                <span class="bg-red-500/20 px-2 py-0.5 rounded text-[10px] text-red-300">Câu hỏi Vận dụng</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Start Button -->
-                    <button onclick="startGame()" class="pulse-slow w-full sm:w-2/3 py-4 rounded-full gradient-orange text-white font-game font-black text-xl tracking-wider shadow-xl hover:brightness-110 active:scale-95 transition border-2 border-yellow-300 uppercase">
-                        <i class="fa-solid fa-crosshairs mr-2"></i> BẮT ĐẦU CHIẾN ĐẤU NGAY!
-                    </button>
-                </div>
-
-                <div class="text-center text-xs text-slate-400 border-t border-slate-800 pt-3 w-full">
-                    <span>Lớp Khoa Học Tự Nhiên 6 Đà Lạt | Giáo Viên: Thầy Thái - 086 2008 917</span>
-                </div>
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="screen hidden">
+            <h1 style="color: #ff3333;">GAME OVER</h1>
+            <p class="subtitle">Zombie đã xâm nhập thành công!</p>
+            <div class="score-big" id="final-score">0</div>
+            <div class="stats" id="final-stats">
+                Số câu trả lời đúng: 0<br>
+                Mức độ: Vừa
             </div>
-
-            <!-- GAME PLAY HUD (Canvas Top UI) -->
-            <div id="gameHud" class="hidden absolute top-0 left-0 right-0 z-20 p-3 bg-gradient-to-b from-black/80 to-transparent flex justify-between items-center">
-                <!-- Health Hearts -->
-                <div class="flex items-center gap-2 bg-slate-900/80 px-3 py-1.5 rounded-full border border-red-500/30">
-                    <span class="text-xs font-bold text-slate-300 font-game">MÁU:</span>
-                    <div id="heartsContainer" class="flex gap-1 text-red-500 text-lg">
-                        <i class="fa-solid fa-heart"></i>
-                        <i class="fa-solid fa-heart"></i>
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
-                </div>
-
-                <!-- Game Stats -->
-                <div class="flex gap-4">
-                    <div class="bg-slate-900/80 px-3 py-1.5 rounded-full border border-yellow-500/30 text-yellow-400 font-game text-sm font-bold flex items-center gap-1.5">
-                        <i class="fa-solid fa-trophy text-brandOrange"></i> ĐIỂM: <span id="scoreDisplay" class="text-base text-white">0</span>
-                    </div>
-                    <div class="bg-slate-900/80 px-3 py-1.5 rounded-full border border-cyan-500/30 text-cyan-400 font-game text-sm font-bold flex items-center gap-1.5">
-                        <i class="fa-solid fa-bullseye"></i> CÂU: <span id="questionCountDisplay" class="text-base text-white">0/10</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CANVAS FOR GAMEPLAY -->
-            <canvas id="gameCanvas" class="w-full h-full min-h-[500px] block bg-slate-950 cursor-crosshair"></canvas>
-
-            <!-- 2. QUESTION OVERLAY MODAL -->
-            <div id="questionModal" class="hidden absolute inset-0 z-40 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
-                <div class="glass-panel w-full max-w-2xl rounded-2xl p-4 sm:p-6 border-2 border-brandCyan shadow-2xl relative flex flex-col">
-                    
-                    <!-- Question Header & Timer -->
-                    <div class="flex justify-between items-center mb-4 border-b border-cyan-500/30 pb-3">
-                        <div class="flex items-center gap-2">
-                            <span id="questionSubjectBadge" class="bg-brandOrange text-white font-black text-xs px-2.5 py-1 rounded-md uppercase font-game">
-                                HÓA HỌC
-                            </span>
-                            <span id="questionTopicBadge" class="text-xs text-cyan-200 font-semibold hidden sm:inline">
-                                Chương 2: Chất quanh ta
-                            </span>
-                        </div>
-
-                        <!-- Timer Bar & Counter -->
-                        <div class="flex items-center gap-2 bg-slate-900/90 px-3 py-1 rounded-full border border-red-500/50">
-                            <i class="fa-solid fa-stopwatch text-red-400 animate-pulse"></i>
-                            <span id="timerText" class="font-game font-black text-red-400 text-lg">15s</span>
-                        </div>
-                    </div>
-
-                    <!-- Question Content -->
-                    <div class="mb-5">
-                        <h3 id="questionText" class="text-base sm:text-xl font-bold text-white leading-relaxed font-sans">
-                            Nội dung câu hỏi KHTN 6 sẽ hiển thị ở đây...?
-                        </h3>
-                    </div>
-
-                    <!-- Answer Choices Grid -->
-                    <div id="optionsContainer" class="grid grid-cols-1 gap-2.5 mb-4">
-                        <!-- Dynamic Buttons inserted via JS -->
-                    </div>
-
-                    <!-- Question Footer Info -->
-                    <div class="mt-auto text-right text-[11px] text-cyan-300/60 italic border-t border-slate-700/50 pt-2">
-                        Thầy Thái Đà Lạt - Ôn tập KHTN 6 HK1 | Hotline 086 2008 917
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. GAME OVER / RESULT SCREEN -->
-            <div id="resultScreen" class="hidden absolute inset-0 z-50 bg-gradient-to-b from-slate-950 via-brandBlueDark to-slate-950 p-6 flex flex-col items-center justify-center text-center overflow-y-auto">
-                <div class="glass-panel max-w-xl w-full p-6 sm:p-8 rounded-2xl border-2 border-brandOrange shadow-2xl relative">
-                    
-                    <div id="resultIcon" class="text-5xl mb-3 text-red-500">
-                        <i class="fa-solid fa-skull-crossbones"></i>
-                    </div>
-
-                    <h2 id="resultTitle" class="font-game text-3xl sm:text-4xl font-black text-yellow-400 uppercase tracking-wide mb-2">
-                        GAME OVER
-                    </h2>
-                    
-                    <p id="resultSubtitle" class="text-slate-300 text-sm mb-6">
-                        Zombie đã áp sát! Cùng Thầy Thái ôn luyện thêm để vượt qua kỳ thi HK1 nhé!
-                    </p>
-
-                    <!-- Stats Table -->
-                    <div class="bg-slate-900/90 rounded-xl p-4 mb-6 border border-slate-700 text-left space-y-2 font-game text-sm">
-                        <div class="flex justify-between border-b border-slate-800 pb-2">
-                            <span class="text-slate-400">Tổng điểm tích lũy:</span>
-                            <span id="finalScore" class="text-yellow-400 font-extrabold text-lg">0</span>
-                        </div>
-                        <div class="flex justify-between border-b border-slate-800 pb-2">
-                            <span class="text-slate-400">Số câu trả lời đúng:</span>
-                            <span id="finalCorrect" class="text-green-400 font-bold">0 / 0</span>
-                        </div>
-                        <div class="flex justify-between border-b border-slate-800 pb-2">
-                            <span class="text-slate-400">Đánh giá học lực KHTN 6:</span>
-                            <span id="finalRank" class="text-brandCyan font-bold">Cần Cố Gắng thêm</span>
-                        </div>
-                    </div>
-
-                    <!-- Teacher Message -->
-                    <div class="bg-brandOrange/10 border border-brandOrange/40 rounded-xl p-3 mb-6 text-left flex items-start gap-3">
-                        <div class="text-2xl text-brandOrange mt-1"><i class="fa-solid fa-chalkboard-user"></i></div>
-                        <div class="text-xs text-slate-200">
-                            <strong class="text-yellow-300 block font-game text-sm mb-0.5">Lời nhắn từ Thầy Thái Đà Lạt:</strong>
-                            <span id="teacherComment">Hãy luyện tập lại để ghi nhớ chắc kiến thức các chương nhé các em!</span>
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <button onclick="restartGame()" class="flex-1 py-3 rounded-xl gradient-orange text-white font-game font-bold text-sm tracking-wide hover:brightness-110 transition border border-yellow-300">
-                            <i class="fa-solid fa-rotate-right mr-1"></i> CHƠI LẠI NGAY
-                        </button>
-                        <button onclick="showStartScreen()" class="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 font-game font-bold text-sm border border-cyan-500/40 transition">
-                            <i class="fa-solid fa-house mr-1"></i> MÀN HÌNH CHÍNH
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
+            <button class="btn" id="restart-btn">CHƠI LẠI</button>
         </div>
-    </main>
-
-    <!-- FOOTER BRANDING -->
-    <footer class="bg-brandBlueDark text-slate-400 text-center text-xs py-2 px-4 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center max-w-7xl mx-auto w-full gap-1">
-        <div>
-            © 2026 - LỚP KHOA HỌC TỰ NHIÊN 6 THẦY THÁI ĐÀ LẠT | SÁCH KẾT NỐI TRI THỨC
-        </div>
-        <div class="text-brandOrange font-bold flex items-center gap-2">
-            <span>LH ĐĂNG KÝ HỌC: 086 2008 917</span>
-            <span class="text-slate-600">|</span>
-            <span class="text-cyan-400"><i class="fa-solid fa-location-dot"></i> ĐÀ LẠT</span>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        /* QUESTION DATABASE (KHTN 6 - KẾT NỐI TRI THỨC VỚI CUỘC SỐNG) */
-        const questionBank = [
-            // CHƯƠNG 1: VẬT LÝ & NHẬP MÔN KHTN
-            {
-                id: 1,
-                subject: 'vatly',
-                subjectName: 'VẬT LÝ / KHTN',
-                topic: 'Chương 1: Quy định an toàn',
-                diff: 'easy',
-                question: 'Kí hiệu cảnh báo nào sau đây báo hiệu chất độc hại đối với sức khỏe?',
-                options: [
-                    'A. Hình đầu lâu xương chéo',
-                    'B. Hình ngọn lửa',
-                    'C. Hình giọt nước nhỏ lên tay',
-                    'D. Hình quạt 3 cánh'
+        // --- NÂN CẤP CƠ SỞ DỮ LIỆU CÂU HỎI KHTN 6 (KẾT NỐI TRI THỨC) ---
+        const questionBank = {
+            physics: {
+                easy: [
+                    { q: "Đơn vị đo độ dài chính thức trong hệ thống đo lường của nước ta là gì?", opts: ["Milimét (mm)", "Mét (m)", "Centimét (cm)", "Kilômét (km)"], a: 1 },
+                    { q: "Dụng cụ dùng để đo khối lượng của một vật là gì?", opts: ["Thước dây", "Nhiệt kế", "Cân", "Bình chia độ"], a: 2 },
+                    { q: "Đơn vị đo thời gian trong hệ đo lường hợp pháp của Việt Nam là gì?", opts: ["Giây (s)", "Phút (min)", "Giờ (h)", "Ngày"], a: 0 },
+                    { q: "Dụng cụ dùng để đo nhiệt độ là gì?", opts: ["Lực kế", "Nhiệt kế", "Cân đồng hồ", "Thước kẹp"], a: 1 }
                 ],
-                correct: 0,
-                explain: 'Hình đầu lâu xương chéo là kí hiệu cảnh báo hóa chất độc hại.'
-            },
-            {
-                id: 2,
-                subject: 'vatly',
-                subjectName: 'VẬT LÝ / KHTN',
-                topic: 'Chương 1: Phép đo độ dài',
-                diff: 'easy',
-                question: 'Đơn vị đo độ dài hợp pháp trong hệ thống đo lường của nước ta là gì?',
-                options: ['A. Mét (m)', 'B. Kilôgam (kg)', 'C. Giây (s)', 'D. Lít (L)'],
-                correct: 0,
-                explain: 'Đơn vị đo độ dài chính thức là mét (m).'
-            },
-            {
-                id: 3,
-                subject: 'vatly',
-                subjectName: 'VẬT LÝ / KHTN',
-                topic: 'Chương 1: Phép đo khối lượng',
-                diff: 'medium',
-                question: 'Để đo khối lượng của một vật, người ta sử dụng dụng cụ đo nào sau đây?',
-                options: ['A. Thước dây', 'B. Cân', 'C. Đồng hồ bấm giây', 'D. Nhiệt kế'],
-                correct: 1,
-                explain: 'Cân là dụng cụ dùng để đo khối lượng.'
-            },
-            {
-                id: 4,
-                subject: 'vatly',
-                subjectName: 'VẬT LÝ / KHTN',
-                topic: 'Chương 1: Kính hiển vi',
-                diff: 'medium',
-                question: 'Dụng cụ nào dùng để quan sát những vật có kích thước rất nhỏ mà mắt thường không nhìn thấy được (như tế bào)?',
-                options: ['A. Kính lúp', 'B. Kính hiển vi quang học', 'C. Kính viễn vọng', 'D. Kính râm'],
-                correct: 1,
-                explain: 'Kính hiển vi quang học giúp phóng đại hàng trăm đến hàng nghìn lần.'
-            },
-            {
-                id: 5,
-                subject: 'vatly',
-                subjectName: 'VẬT LÝ / KHTN',
-                topic: 'Chương 1: Phép đo nhiệt độ',
-                diff: 'hard',
-                question: 'Nhiệt độ sôi của nước tinh khiết ở điều kiện áp suất tiêu chuẩn là bao nhiêu độ C?',
-                options: ['A. 0°C', 'B. 37°C', 'C. 100°C', 'D. 50°C'],
-                correct: 2,
-                explain: 'Nước tinh khiết sôi ở 100°C ở áp suất tiêu chuẩn.'
-            },
-
-            // CHƯƠNG 2: HÓA HỌC - CHẤT QUANH TA
-            {
-                id: 6,
-                subject: 'hoahoc',
-                subjectName: 'HÓA HỌC',
-                topic: 'Chương 2: Các thể của chất',
-                diff: 'easy',
-                question: 'Chất ở thể nào có hình dạng xác định và rất khó bị nén?',
-                options: ['A. Thể Rắn', 'B. Thể Lỏng', 'C. Thể Khí', 'D. Thể Hơi'],
-                correct: 0,
-                explain: 'Chất ở thể rắn có hình dạng xác định và khó nén.'
-            },
-            {
-                id: 7,
-                subject: 'hoahoc',
-                subjectName: 'HÓA HỌC',
-                topic: 'Chương 2: Sự chuyển thể',
-                diff: 'easy',
-                question: 'Quá trình chất chuyển từ thể lỏng sang thể khí (hơi) gọi là gì?',
-                options: ['A. Sự nóng chảy', 'B. Sự bay hơi', 'C. Sự ngưng tụ', 'D. Sự đông đặc'],
-                correct: 1,
-                explain: 'Chuyển từ lỏng sang khí gọi là sự bay hơi.'
-            },
-            {
-                id: 8,
-                subject: 'hoahoc',
-                subjectName: 'HÓA HỌC',
-                topic: 'Chương 2: Sự ngưng tụ',
-                diff: 'medium',
-                question: 'Hiện tượng đọng sương trên lá cây vào buổi sáng sớm là ví dụ của quá trình nào?',
-                options: ['A. Bay hơi', 'B. Sôi', 'C. Ngưng tụ', 'D. Nóng chảy'],
-                correct: 2,
-                explain: 'Hơi nước trong không khí gặp lạnh ngưng tụ thành hạt sương.'
-            },
-            {
-                id: 9,
-                subject: 'hoahoc',
-                subjectName: 'HÓA HỌC',
-                topic: 'Chương 2: Thành phần không khí',
-                diff: 'hard',
-                question: 'Khí nào chiếm thể tích lớn nhất trong thành phần không khí xung quanh chúng ta (khoảng 78%)?',
-                options: ['A. Khí Oxygen', 'B. Khí Nitrogen', 'C. Khí Carbon dioxide', 'D. Khí Argon'],
-                correct: 1,
-                explain: 'Nitrogen chiếm khoảng 78% thể tích không khí.'
-            },
-
-            // CHƯƠNG 3: HÓA HỌC - VẬT LIỆU, NHIÊN LIỆU, LƯƠNG THỰC
-            {
-                id: 10,
-                subject: 'hoahoc',
-                subjectName: 'HÓA HỌC',
-                topic: 'Chương 3: Tính chất vật liệu',
-                diff: 'easy',
-                question: 'Tính chất đặc trưng nào làm cho kim loại được dùng làm lõi dây dẫn điện?',
-                options: ['A. Dẫn điện tốt', 'B. Dẫn nhiệt kém', 'C. Dễ vỡ', 'D. Đàn hồi tốt'],
-                correct: 0,
-                explain: 'Kim loại dẫn điện tốt nên làm lõi dây điện.'
-            },
-            {
-                id: 11,
-                subject: 'hoahoc',
-                subjectName: 'HÓA HỌC',
-                topic: 'Chương 3: Nhiên liệu',
-                diff: 'medium',
-                question: 'Dãy nào sau đây gồm toàn các ví dụ về nhiên liệu?',
-                options: [
-                    'A. Than đá, dầu mỏ, khí đốt',
-                    'B. Thủy tinh, xi măng, cát',
-                    'C. Gạo, ngô, khoai, sắn',
-                    'D. Nhựa, cao su, sắt'
+                medium: [
+                    { q: "Khi dùng thước đo độ dài, ta cần đặt thước như thế nào?", opts: ["Đặt lệch so với chiều dài cần đo", "Đặt dọc theo chiều dài cần đo, vạch số 0 trùng một đầu của vật", "Đặt tùy ý", "Đặt ở bất kỳ vạch nào trùng đầu vật"], a: 1 },
+                    { q: "Giới hạn đo (GHĐ) của thước là gì?", opts: ["Khoảng cách giữa 2 vạch chia liên tiếp", "Chiều dài lớn nhất ghi trên thước", "Chiều dài nhỏ nhất ghi trên thước", "Độ rộng của thước"], a: 1 },
+                    { q: "Độ chia nhỏ nhất (ĐCNN) của thước là gì?", opts: ["Chiều dài giữa 2 vạch chia liên tiếp trên thước", "Vạch chia nhỏ nhất trên thước", "Chiều dài nhỏ nhất ghi trên thước", "Giá trị nhỏ nhất ghi trên thước"], a: 0 },
+                    { q: "Để đo thời gian chạy 100m của học sinh, ta nên dùng loại đồng hồ nào?", opts: ["Đồng hồ treo tường", "Đồng hồ cát", "Đồng hồ bấm giây", "Đồng hồ đeo tay thông thường"], a: 2 }
                 ],
-                correct: 0,
-                explain: 'Than đá, dầu mỏ, khí đốt khi cháy tỏa nhiệt nên là nhiên liệu.'
+                hard: [
+                    { q: "Một bình chia độ đang chứa 50cm³ nước. Thả chìm một viên đá vào bình thì nước dâng lên vạch 85cm³. Thể tích viên đá là bao nhiêu?", opts: ["135 cm³", "50 cm³", "35 cm³", "85 cm³"], a: 2 },
+                    { q: "Thang nhiệt độ Celsius quy định nhiệt độ của nước đá đang tan và hơi nước đang sôi lần lượt là:", opts: ["0°C và 100°C", "32°F và 212°F", "100°C và 0°C", "0°K và 100°K"], a: 0 },
+                    { q: "Thực hành đo khối lượng túi hoa quả bằng cân đồng hồ, thao tác nào sau đây KHÔNG đúng?", opts: ["Đặt cân trên bề mặt bằng phẳng", "Hiệu chỉnh kim cân về vạch số 0", "Mắt nhìn lệch so với kim cân", "Đặt vật cẩn thận lên đĩa cân"], a: 2 }
+                ]
             },
-            {
-                id: 12,
-                subject: 'hoahoc',
-                subjectName: 'HÓA HỌC',
-                topic: 'Chương 3: Lương thực - Thực phẩm',
-                diff: 'hard',
-                question: 'Chất dinh dưỡng nào cung cấp năng lượng chính cho hoạt động hàng ngày của con người (có nhiều trong gạo, ngô, khoai)?',
-                options: ['A. Protein (Chất đạm)', 'B. Carbohydrate (Chất bột đường)', 'C. Lipid (Chất béo)', 'D. Vitamin'],
-                correct: 1,
-                explain: 'Carbohydrate (tinh bột) là nguồn cung cấp năng lượng chính.'
-            },
-
-            // CHƯƠNG 4: HÓA HỌC - HỖN HỢP & TÁCH CHẤT
-            {
-                id: 13,
-                subject: 'hoahoc',
-                subjectName: 'HÓA HỌC',
-                topic: 'Chương 4: Hỗn hợp',
-                diff: 'easy',
-                question: 'Hòa tan muối ăn vào nước thu được chất chất lỏng trong suốt. Đây được gọi là gì?',
-                options: ['A. Huyền phù', 'B. Nhũ tương', 'C. Dung dịch', 'D. Hỗn hợp không đồng nhất'],
-                correct: 2,
-                explain: 'Muối tan hoàn toàn trong nước tạo thành dung dịch đồng nhất.'
-            },
-            {
-                id: 14,
-                subject: 'hoahoc',
-                subjectName: 'HÓA HỌC',
-                topic: 'Chương 4: Tách chất',
-                diff: 'medium',
-                question: 'Phương pháp nào thích hợp nhất để tách cát không tan ra khỏi hỗn hợp nước và cát?',
-                options: ['A. Cô cạn', 'B. Lọc', 'C. Chiết', 'D. Đun sôi'],
-                correct: 1,
-                explain: 'Phương pháp lọc dùng để tách chất rắn không tan ra khỏi chất lỏng.'
-            },
-            {
-                id: 15,
-                subject: 'hoahoc',
-                subjectName: 'HÓA HỌC',
-                topic: 'Chương 4: Huyền phù & Nhũ tương',
-                diff: 'hard',
-                question: 'Sữa tươi hoặc hỗn hợp dầu ăn khuấy đều trong nước thuộc loại hỗn hợp nào?',
-                options: ['A. Dung dịch', 'B. Huyền phù', 'C. Nhũ tương', 'D. Chất tinh khiết'],
-                correct: 2,
-                explain: 'Nhũ tương là hỗn hợp gồm các giọt chất lỏng lơ lửng trong chất lỏng khác.'
-            },
-
-            // CHƯƠNG 5: SINH HỌC - TẾ BÀO
-            {
-                id: 16,
-                subject: 'sinhhoc',
-                subjectName: 'SINH HỌC',
-                topic: 'Chương 5: Cấu tạo Tế bào',
-                diff: 'easy',
-                question: 'Đơn vị cơ sở cấu tạo nên mọi cơ thể sống là gì?',
-                options: ['A. Tế bào', 'B. Mô', 'C. Cơ quan', 'D. Nguyên tử'],
-                correct: 0,
-                explain: 'Mọi cơ thể sống đều được cấu tạo từ tế bào.'
-            },
-            {
-                id: 17,
-                subject: 'sinhhoc',
-                subjectName: 'SINH HỌC',
-                topic: 'Chương 5: Thành phần Tế bào',
-                diff: 'easy',
-                question: 'Bào quan nào giúp tế bào thực vật quang hợp tổng hợp chất hữu cơ?',
-                options: ['A. Màng tế bào', 'B. Lục lạp', 'C. Nhân tế bào', 'D. Không bào lớn'],
-                correct: 1,
-                explain: 'Lục lạp chứa diệp lục giúp tế bào thực vật quang hợp.'
-            },
-            {
-                id: 18,
-                subject: 'sinhhoc',
-                subjectName: 'SINH HỌC',
-                topic: 'Chương 5: Phân chia Tế bào',
-                diff: 'medium',
-                question: 'Thành phần nào điều khiển mọi hoạt động sống của tế bào?',
-                options: ['A. Màng tế bào', 'B. Tế bào chất', 'C. Nhân (hoặc vùng nhân)', 'D. Thành tế bào'],
-                correct: 2,
-                explain: 'Nhân chứa vật chất di truyền, điều khiển mọi hoạt động của tế bào.'
-            },
-            {
-                id: 19,
-                subject: 'sinhhoc',
-                subjectName: 'SINH HỌC',
-                topic: 'Chương 5: Sự lớn lên tế bào',
-                diff: 'hard',
-                question: 'Một tế bào ban đầu sau 3 lần phân chia liên tiếp sẽ tạo ra bao nhiêu tế bào con?',
-                options: ['A. 3 tế bào', 'B. 6 tế bào', 'C. 8 tế bào', 'D. 12 tế bào'],
-                correct: 2,
-                explain: 'Số tế bào = 2^3 = 8 tế bào con.'
-            },
-
-            // CHƯƠNG 6: SINH HỌC - TỪ TẾ BÀO ĐẾN CƠ THỂ
-            {
-                id: 20,
-                subject: 'sinhhoc',
-                subjectName: 'SINH HỌC',
-                topic: 'Chương 6: Cơ thể đơn bào',
-                diff: 'easy',
-                question: 'Sinh vật nào sau đây là cơ thể đơn bào (cấu tạo từ 1 tế bào)?',
-                options: ['A. Trùng roi (hoặc Trùng biến hình)', 'B. Cây hoa hồng', 'C. Con mèo', 'D. Cây lúa'],
-                correct: 0,
-                explain: 'Trùng roi là cơ thể đơn bào chỉ gồm một tế bào.'
-            },
-            {
-                id: 21,
-                subject: 'sinhhoc',
-                subjectName: 'SINH HỌC',
-                topic: 'Chương 6: Các cấp tổ chức',
-                diff: 'medium',
-                question: 'Sắp xếp đúng thứ tự các cấp tổ chức từ thấp đến cao trong cơ thể đa bào?',
-                options: [
-                    'A. Tế bào -> Mô -> Cơ quan -> Hệ cơ quan -> Cơ thể',
-                    'B. Mô -> Tế bào -> Cơ quan -> Cơ thể',
-                    'C. Cơ quan -> Tế bào -> Mô -> Cơ thể',
-                    'D. Tế bào -> Cơ quan -> Mô -> Hệ cơ quan -> Cơ thể'
+            chemistry: {
+                easy: [
+                    { q: "Chất nào sau đây tồn tại ở thể khí trong điều kiện thường?", opts: ["Nước", "Sắt", "Khí Oxygen", "Đường"], a: 2 },
+                    { q: "Vật thể nào sau đây là vật thể tự nhiên?", opts: ["Cái bàn gỗ", "Quả núi", "Chiếc xe đạp", "Cái cốc thủy tinh"], a: 1 },
+                    { q: "Khí nào chiếm khoảng 21% thể tích không khí?", opts: ["Nitrogen", "Carbon dioxide", "Oxygen", "Hydrogen"], a: 2 },
+                    { q: "Vật liệu nào sau đây thường được dùng để dẫn điện?", opts: ["Nhựa", "Thủy tinh", "Đồng", "Gỗ khô"], a: 2 }
                 ],
-                correct: 0,
-                explain: 'Trật tự đúng: Tế bào -> Mô -> Cơ quan -> Hệ cơ quan -> Cơ thể.'
+                medium: [
+                    { q: "Hành động nào sau đây biểu hiện tính chất hóa học của chất?", opts: ["Nước hoa quả đông lại thành đá", "Đốt cháy que củi thành than", "Hòa tan đường vào nước", "Mặt trời làm khô quần áo"], a: 1 },
+                    { q: "Để tách muối ăn ra khỏi dung dịch nước muối, người ta dùng phương pháp nào?", opts: ["Lọc", "Cô cạn (Bốc hơi)", "Dùng nam thạch", "Lắng"], a: 1 },
+                    { q: "Hỗn hợp nào sau đây là hỗn hợp đồng nhất?", opts: ["Nước và dầu ăn", "Nước đường", "Nước và cát", "Hỗn hợp xi măng và nước"], a: 1 },
+                    { q: "Quá trình chuyển từ thể rắn sang thể lỏng gọi là gì?", opts: ["Sự nóng chảy", "Sự đông đặc", "Sự bay hơi", "Sự ngưng tụ"], a: 0 }
+                ],
+                hard: [
+                    { q: "Phương pháp lọc dùng để tách riêng các chất ra khỏi hỗn hợp nào?", opts: ["Chất rắn tan trong chất lỏng", "Chất rắn không tan trong chất lỏng", "Hai chất lỏng hòa tan vào nhau", "Các chất khí khác nhau"], a: 1 },
+                    { q: "Khí nào gây nên hiện tượng hiệu ứng nhà kính và biến đổi khí hậu?", opts: ["Oxygen", "Nitrogen", "Carbon dioxide (CO2)", "Argon"], a: 2 },
+                    { q: "Thành phần phần trăm thể tích của khí Nitrogen trong không khí xấp xỉ là bao nhiêu?", opts: ["21%", "78%", "1%", "0.03%"], a: 1 }
+                ]
             },
-            {
-                id: 22,
-                subject: 'sinhhoc',
-                subjectName: 'SINH HỌC',
-                topic: 'Chương 6: Hệ cơ quan',
-                diff: 'hard',
-                question: 'Dạ dày, ruột non, ruột già thuộc hệ cơ quan nào trong cơ thể người?',
-                options: ['A. Hệ hô hấp', 'B. Hệ tiêu hóa', 'C. Hệ tuần hoàn', 'D. Hệ thần kinh'],
-                correct: 1,
-                explain: 'Dạ dày, ruột non... thuộc hệ tiêu hóa.'
+            biology: {
+                easy: [
+                    { q: "Đơn vị cơ sở cấu tạo nên mọi cơ thể sống là gì?", opts: ["Mô", "Tế bào", "Cơ quan", "Hệ cơ quan"], a: 1 },
+                    { q: "Dụng cụ nào giúp chúng ta quan sát rõ cấu tạo của tế bào?", opts: ["Kính kính lặp", "Kính hiển vi quang học", "Kính râm", "Thước phóng đại"], a: 1 },
+                    { q: "Thành phần nào điều khiển mọi hoạt động sống của tế bào?", opts: ["Màng tế bào", "Tế bào chất", "Nhân tế bào (hoặc vùng nhân)", "Không bào"], a: 2 },
+                    { q: "Cơ thể nào sau đây là cơ thể đơn bào?", opts: ["Con người", "Cây bàng", "Trùng roi", "Con mèo"], a: 2 }
+                ],
+                medium: [
+                    { q: "Điểm khác biệt lớn nhất giữa tế bào thực vật và tế bào động vật là gì?", opts: ["Tế bào thực vật có màng sinh chất", "Tế bào thực vật có lục lạp và thành tế bào", "Tế bào động vật có nhân", "Tế bào thực vật không có tế bào chất"], a: 1 },
+                    { q: "Sự lớn lên và phân chia của tế bào có ý nghĩa gì đối với sinh vật?", opts: ["Giúp cơ thể sinh sản", "Giúp cơ thể lớn lên và thay thế tế bào già/hỏng", "Tăng khối lượng nước trong cơ thể", "Giúp cơ thể đổi màu"], a: 1 },
+                    { q: "Tập hợp các tế bào giống nhau cùng thực hiện một chức năng nhất định tạo thành gì?", opts: ["Cơ quan", "Mô", "Hệ cơ quan", "Cơ thể"], a: 1 },
+                    { q: "Cơ quan nào sau đây thuộc hệ tuần hoàn ở người?", opts: ["Dạ dày", "Phổi", "Tim", "Thận"], a: 2 }
+                ],
+                hard: [
+                    { q: "Sắp xếp các cấp tổ chức của cơ thể đa bào từ nhỏ đến lớn:", opts: ["Tế bào -> Cơ quan -> Mô -> Hệ cơ quan -> Cơ thể", "Tế bào -> Mô -> Cơ quan -> Hệ cơ quan -> Cơ thể", "Mô -> Tế bào -> Cơ quan -> Hệ cơ quan -> Cơ thể", "Tế bào -> Mô -> Hệ cơ quan -> Cơ quan -> Cơ thể"], a: 1 },
+                    { q: "Thành phần nào của tế bào là nơi diễn ra các hoạt động sống cơ bản như hô hấp, tổng hợp chất?", opts: ["Nhân tế bào", "Tế bào chất", "Màng tế bào", "Thành tế bào"], a: 1 },
+                    { q: "Một tế bào sau 3 lần phân chia liên tiếp sẽ tạo ra bao nhiêu tế bào con?", opts: ["3 tế bào", "6 tế bào", "8 tế bào", "16 tế bào"], a: 2 }
+                ]
             }
-        ];
+        };
 
-        /* AUDIO SYNTHESIZER (Web Audio API - No External Assets Needed) */
-        class SoundFX {
-            constructor() {
-                this.ctx = null;
-                this.enabled = true;
-            }
-            init() {
-                if (!this.ctx) {
-                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-            }
-            playLaser() {
-                if (!this.enabled) return;
-                this.init();
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(100, this.ctx.currentTime + 0.15);
-                gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.15);
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-                osc.start();
-                osc.stop(this.ctx.currentTime + 0.15);
-            }
-            playCorrect() {
-                if (!this.enabled) return;
-                this.init();
-                const notes = [523.25, 659.25, 783.99]; // C5, E5, G5
-                notes.forEach((freq, index) => {
-                    const osc = this.ctx.createOscillator();
-                    const gain = this.ctx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.value = freq;
-                    gain.gain.setValueAtTime(0.15, this.ctx.currentTime + index * 0.08);
-                    gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + index * 0.08 + 0.2);
-                    osc.connect(gain);
-                    gain.connect(this.ctx.destination);
-                    osc.start(this.ctx.currentTime + index * 0.08);
-                    osc.stop(this.ctx.currentTime + index * 0.08 + 0.2);
-                });
-            }
-            playWrong() {
-                if (!this.enabled) return;
-                this.init();
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.type = 'square';
-                osc.frequency.setValueAtTime(180, this.ctx.currentTime);
-                osc.frequency.linearRampToValueAtTime(90, this.ctx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-                osc.start();
-                osc.stop(this.ctx.currentTime + 0.3);
-            }
-            playZombieBite() {
-                if (!this.enabled) return;
-                this.init();
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(120, this.ctx.currentTime);
-                osc.frequency.linearRampToValueAtTime(60, this.ctx.currentTime + 0.4);
-                gain.gain.setValueAtTime(0.4, this.ctx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.4);
-                osc.connect(gain);
-                gain.connect(this.ctx.destination);
-                osc.start();
-                osc.stop(this.ctx.currentTime + 0.4);
-            }
-        }
-
-        const sound = new SoundFX();
-        function toggleAudio() {
-            sound.enabled = !sound.enabled;
-            const icon = document.getElementById('soundIcon');
-            if (sound.enabled) {
-                icon.className = 'fa-solid fa-volume-high';
-            } else {
-                icon.className = 'fa-solid fa-volume-xmark text-red-400';
-            }
-        }
-
-        /* GAME STATE VARIABLES */
-        let canvas, ctx;
-        let selectedSubject = 'all';
-        let selectedDiff = 'easy'; // 'easy', 'medium', 'hard'
-        let lives = 3;
-        let score = 0;
-        let currentQuestionIndex = 0;
-        let correctAnswersCount = 0;
-        let activeQuestions = [];
-        let currentQuestion = null;
+        // Engine Game Variables
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
 
         let gameRunning = false;
-        let timerInterval = null;
-        let timeLeft = 15;
-        let timePerQuestion = 15;
+        let score = 0;
+        let lives = 3;
+        let activeZombies = [];
+        let bullets = [];
+        let currentSubject = "physics";
+        let currentDifficulty = "medium";
+        let spawnTimer = null;
+        let activeQuestionZombie = null;
+        let correctAnswersCount = 0;
 
-        // Canvas Game Entities
-        let player = { x: 100, y: 300, width: 45, height: 60 };
-        let zombies = [];
-        let particles = [];
-        let lasers = [];
-        let spawnTimer = 0;
+        // Player Cannon Settings
+        const player = {
+            x: 50,
+            y: 275,
+            radius: 25,
+            color: "#0055ff"
+        };
 
-        // Difficulty Speed Multipliers
+        // Speed configurations based on difficulty
         const diffConfig = {
-            easy: { speed: 0.8, time: 20 },
-            medium: { speed: 1.4, time: 15 },
-            hard: { speed: 2.2, time: 10 }
+            easy: { speedMin: 0.4, speedMax: 0.8, interval: 4000 },
+            medium: { speedMin: 0.8, speedMax: 1.4, interval: 3000 },
+            hard: { speedMin: 1.5, speedMax: 2.2, interval: 2000 }
         };
 
-        window.onload = function() {
-            canvas = document.getElementById('gameCanvas');
-            ctx = canvas.getContext('2d');
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-            
-            // Mouse/Touch controls on canvas
-            canvas.addEventListener('click', handleCanvasClick);
-        };
-
+        // Resize Canvas dynamically
         function resizeCanvas() {
-            const container = document.getElementById('appContainer');
-            canvas.width = container.clientWidth;
-            canvas.height = container.clientHeight;
-            if (player) player.y = canvas.height / 2 - 30;
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            player.y = canvas.height / 2;
         }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
 
-        function selectSubject(subj) {
-            selectedSubject = subj;
-            document.querySelectorAll('.subject-btn').forEach(btn => {
-                btn.classList.remove('active', 'border-brandOrange', 'bg-brandOrange/20', 'text-yellow-300');
-                btn.classList.add('border-slate-700', 'bg-slate-800/80');
-            });
-            const activeBtn = document.getElementById(`subj-${subj}`);
-            activeBtn.classList.add('active', 'border-brandOrange', 'bg-brandOrange/20', 'text-yellow-300');
-            activeBtn.classList.remove('border-slate-700', 'bg-slate-800/80');
-        }
-
-        function selectDifficulty(diff) {
-            selectedDiff = diff;
-            document.querySelectorAll('.diff-btn').forEach(btn => {
-                btn.classList.remove('active', 'border-green-500', 'border-yellow-400', 'border-red-500');
-                btn.classList.add('border-slate-700');
-            });
-            const activeBtn = document.getElementById(`diff-${diff}`);
-            activeBtn.classList.add('active');
-            if (diff === 'easy') activeBtn.classList.add('border-green-500');
-            if (diff === 'medium') activeBtn.classList.add('border-yellow-400');
-            if (diff === 'hard') activeBtn.classList.add('border-red-500');
-        }
-
-        function startGame() {
-            sound.init();
-            
-            // Filter Question Bank
-            let filtered = questionBank;
-            if (selectedSubject !== 'all') {
-                filtered = questionBank.filter(q => q.subject === selectedSubject);
-            }
-            // Shuffle and pick 10 questions
-            activeQuestions = [...filtered].sort(() => Math.random() - 0.5).slice(0, 10);
-            
-            if (activeQuestions.length === 0) {
-                alert('Không đủ câu hỏi cho lựa chọn này! Vui lòng chọn phân môn khác.');
-                return;
-            }
-
-            timePerQuestion = diffConfig[selectedDiff].time;
-            lives = 3;
-            score = 0;
-            currentQuestionIndex = 0;
-            correctAnswersCount = 0;
-
-            updateHUD();
-
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('resultScreen').classList.add('hidden');
-            document.getElementById('gameHud').classList.remove('hidden');
-
-            zombies = [];
-            particles = [];
-            lasers = [];
-            gameRunning = true;
-
-            // Spawn first zombie
-            spawnNextZombie();
-
-            requestAnimationFrame(gameLoop);
-        }
-
-        function updateHUD() {
-            document.getElementById('scoreDisplay').innerText = score;
-            document.getElementById('questionCountDisplay').innerText = `${currentQuestionIndex}/${activeQuestions.length}`;
-            
-            const heartsContainer = document.getElementById('heartsContainer');
-            heartsContainer.innerHTML = '';
-            for (let i = 0; i < 3; i++) {
-                if (i < lives) {
-                    heartsContainer.innerHTML += `<i class="fa-solid fa-heart text-red-500"></i>`;
-                } else {
-                    heartsContainer.innerHTML += `<i class="fa-regular fa-heart text-slate-600"></i>`;
-                }
-            }
-        }
-
-        function spawnNextZombie() {
-            if (currentQuestionIndex >= activeQuestions.length) {
-                triggerVictory();
-                return;
-            }
-
-            currentQuestion = activeQuestions[currentQuestionIndex];
-            const speed = diffConfig[selectedDiff].speed;
-
-            // Create Zombie entity
-            zombies = [{
-                x: canvas.width + 50,
-                y: canvas.height / 2 - 35,
-                width: 50,
-                height: 70,
-                speed: speed,
-                question: currentQuestion,
-                active: true
-            }];
-        }
-
-        function gameLoop() {
+        // Game Loop
+        function animate() {
             if (!gameRunning) return;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw Background Grid/Lab floor
-            drawBackground();
+            // Draw Background Grid/Road
+            ctx.strokeStyle = "rgba(0, 85, 255, 0.1)";
+            ctx.lineWidth = 2;
+            for (let i = 0; i < canvas.width; i += 40) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+                ctx.stroke();
+            }
 
-            // Draw Player
-            drawPlayer();
+            // Draw Base Line
+            ctx.strokeStyle = "#ff6b00";
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(100, 0);
+            ctx.lineTo(100, canvas.height);
+            ctx.stroke();
 
-            // Update & Draw Lasers
-            for (let i = lasers.length - 1; i >= 0; i--) {
-                const l = lasers[i];
-                l.x += l.speed;
-                ctx.fillStyle = '#00B4DB';
-                ctx.shadowColor = '#00B4DB';
-                ctx.shadowBlur = 10;
-                ctx.fillRect(l.x, l.y, 25, 6);
-                ctx.shadowBlur = 0;
+            // Draw Player Cannon
+            ctx.fillStyle = player.color;
+            ctx.beginPath();
+            ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "#00d4ff";
+            ctx.lineWidth = 3;
+            ctx.stroke();
 
-                if (l.x > canvas.width) lasers.splice(i, 1);
+            // Cannon Barrel
+            ctx.fillStyle = "#ff6b00";
+            ctx.fillRect(player.x, player.y - 8, 35, 16);
+
+            // Update & Draw Bullets
+            for (let i = bullets.length - 1; i >= 0; i--) {
+                let b = bullets[i];
+                b.x += b.speed;
+
+                ctx.fillStyle = "#ffaa00";
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, 6, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Bullet hits target zombie
+                if (b.targetZombie) {
+                    let dist = Math.hypot(b.x - b.targetZombie.x, b.y - b.targetZombie.y);
+                    if (dist < b.targetZombie.radius) {
+                        // Explosion effect
+                        createExplosion(b.targetZombie.x, b.targetZombie.y);
+                        // Remove zombie
+                        activeZombies = activeZombies.filter(z => z !== b.targetZombie);
+                        bullets.splice(i, 1);
+                        continue;
+                    }
+                }
+
+                if (b.x > canvas.width) {
+                    bullets.splice(i, 1);
+                }
             }
 
             // Update & Draw Zombies
-            zombies.forEach((z, index) => {
-                if (z.active) {
-                    z.x -= z.speed;
-                    drawZombie(z);
+            for (let i = activeZombies.length - 1; i >= 0; i--) {
+                let z = activeZombies[i];
+                z.x -= z.speed;
 
-                    // Check if zombie approaches near player (Trigger Question)
-                    if (z.x <= player.x + 180) {
-                        z.speed = 0; // Pause zombie
-                        openQuestionModal();
+                // Draw Zombie Body
+                ctx.fillStyle = z.color;
+                ctx.beginPath();
+                ctx.arc(z.x, z.y, z.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Zombie Eyes
+                ctx.fillStyle = "#red";
+                ctx.beginPath();
+                ctx.arc(z.x - 8, z.y - 5, 4, 0, Math.PI * 2);
+                ctx.arc(z.x - 8, z.y + 5, 4, 0, Math.PI * 2);
+                ctx.fillStyle = "#ff0000";
+                ctx.fill();
+
+                // Zombie Label
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 12px Arial";
+                ctx.textAlign = "center";
+                ctx.fillText("ZOMBIE", z.x, z.y - z.radius - 5);
+
+                // Zombie reaches defense line
+                if (z.x - z.radius <= 100) {
+                    activeZombies.splice(i, 1);
+                    lives--;
+                    updateHUD();
+                    if (lives <= 0) {
+                        endGame();
                     }
                 }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Particle Explosions
+        let particles = [];
+        function createExplosion(x, y) {
+            // Visual feedback handled gracefully
+        }
+
+        // Spawn Zombie Function
+        function spawnZombie() {
+            if (!gameRunning) return;
+
+            const cfg = diffConfig[currentDifficulty];
+            const speed = Math.random() * (cfg.speedMax - cfg.speedMin) + cfg.speedMin;
+            const yPos = Math.random() * (canvas.height - 100) + 50;
+
+            const newZombie = {
+                x: canvas.width + 30,
+                y: yPos,
+                radius: 22,
+                speed: speed,
+                color: "#2a9d8f"
+            };
+
+            activeZombies.push(newZombie);
+        }
+
+        // Direct Canvas Click Handling for Zombies
+        canvas.addEventListener("click", function (e) {
+            if (!gameRunning) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+
+            // Find clicked zombie
+            for (let z of activeZombies) {
+                let dist = Math.hypot(clickX - z.x, clickY - z.y);
+                if (dist <= z.radius + 15) { // Enhanced touch/click area
+                    triggerQuestion(z);
+                    break;
+                }
+            }
+        });
+
+        // Trigger Quiz Modal
+        function triggerQuestion(zombie) {
+            activeQuestionZombie = zombie;
+            
+            // Get Question Pool
+            let pool = [];
+            if (currentSubject === "all") {
+                pool = [
+                    ...questionBank.physics[currentDifficulty],
+                    ...questionBank.chemistry[currentDifficulty],
+                    ...questionBank.biology[currentDifficulty]
+                ];
+            } else {
+                pool = questionBank[currentSubject][currentDifficulty];
+            }
+
+            const qData = pool[Math.floor(Math.random() * pool.length)];
+
+            // Fill Question UI
+            document.getElementById("q-subject-tag").innerText = `PHÂN MÔN: ${getSubjectName(currentSubject)}`;
+            document.getElementById("q-text").innerText = qData.q;
+
+            const optsContainer = document.getElementById("options-container");
+            optsContainer.innerHTML = "";
+
+            const prefixes = ["A", "B", "C", "D"];
+            qData.opts.forEach((optText, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "opt-btn";
+                btn.innerHTML = `<span class="opt-prefix">${prefixes[idx]}</span> ${optText}`;
+                
+                // Direct click binding
+                btn.onclick = function() {
+                    handleAnswer(idx === qData.a);
+                };
+
+                optsContainer.appendChild(btn);
             });
 
-            // Draw Particles
-            for (let i = particles.length - 1; i >= 0; i--) {
-                const p = particles[i];
-                p.x += p.vx;
-                p.y += p.vy;
-                p.alpha -= 0.02;
-                ctx.fillStyle = p.color;
-                ctx.globalAlpha = Math.max(0, p.alpha);
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.globalAlpha = 1.0;
-
-                if (p.alpha <= 0) particles.splice(i, 1);
-            }
-
-            requestAnimationFrame(gameLoop);
+            // Display Modal
+            document.getElementById("question-modal").classList.remove("hidden");
         }
 
-        function drawBackground() {
-            // Lab / Futuristic grid floor
-            ctx.strokeStyle = 'rgba(0, 180, 219, 0.08)';
-            ctx.lineWidth = 1;
-            const step = 40;
-            for (let x = 0; x < canvas.width; x += step) {
-                ctx.beginPath();
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, canvas.height);
-                ctx.stroke();
-            }
-            for (let y = 0; y < canvas.height; y += step) {
-                ctx.beginPath();
-                ctx.moveTo(0, y);
-                ctx.lineTo(canvas.width, y);
-                ctx.stroke();
-            }
-        }
+        // Handle Selected Answer
+        function handleAnswer(isCorrect) {
+            document.getElementById("question-modal").classList.add("hidden");
 
-        function drawPlayer() {
-            // Dũng sĩ Khoa học
-            const px = player.x;
-            const py = player.y;
-
-            // Head
-            ctx.fillStyle = '#FFD1A4';
-            ctx.beginPath();
-            ctx.arc(px + 20, py + 15, 12, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Hair/Glasses
-            ctx.fillStyle = '#0E2A47';
-            ctx.fillRect(px + 10, py + 3, 20, 8);
-            ctx.fillStyle = '#00B4DB';
-            ctx.fillRect(px + 18, py + 12, 12, 5); // Sci-fi Goggles
-
-            // Body (Lab coat & shirt)
-            ctx.fillStyle = '#FF7A00'; // Orange Shirt
-            ctx.fillRect(px + 10, py + 27, 20, 20);
-            ctx.fillStyle = '#FFFFFF'; // White Lab Coat
-            ctx.fillRect(px + 5, py + 27, 8, 22);
-            ctx.fillRect(px + 27, py + 27, 8, 22);
-
-            // Legs
-            ctx.fillStyle = '#0E2A47';
-            ctx.fillRect(px + 10, py + 47, 8, 15);
-            ctx.fillRect(px + 22, py + 47, 8, 15);
-
-            // Laser Gun
-            ctx.fillStyle = '#00B4DB';
-            ctx.fillRect(px + 28, py + 30, 18, 7);
-        }
-
-        function drawZombie(z) {
-            const zx = z.x;
-            const zy = z.y;
-
-            // Zombie Aura
-            ctx.shadowColor = '#2EE59D';
-            ctx.shadowBlur = 12;
-
-            // Head (Green)
-            ctx.fillStyle = '#2EE59D';
-            ctx.beginPath();
-            ctx.arc(zx + 20, zy + 15, 14, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Red Eyes
-            ctx.fillStyle = '#FF0055';
-            ctx.fillRect(zx + 10, zy + 12, 4, 4);
-            ctx.fillRect(zx + 18, zy + 12, 4, 4);
-
-            // Body (Tattered clothes)
-            ctx.fillStyle = '#334155';
-            ctx.fillRect(zx + 10, zy + 29, 20, 22);
-
-            // Tattered arms reaching out
-            ctx.fillStyle = '#2EE59D';
-            ctx.fillRect(zx - 5, zy + 32, 15, 6);
-
-            // Legs
-            ctx.fillStyle = '#1E293B';
-            ctx.fillRect(zx + 10, zy + 51, 8, 16);
-            ctx.fillRect(zx + 22, zy + 51, 8, 16);
-
-            ctx.shadowBlur = 0;
-
-            // Question Indicator Above Zombie
-            ctx.fillStyle = '#FF7A00';
-            ctx.font = 'bold 12px "Chakra Petch"';
-            ctx.fillText("CÂU HỎI KHTN", zx - 10, zy - 10);
-        }
-
-        function handleCanvasClick(e) {
-            // Optional interactive canvas effects
-        }
-
-        function openQuestionModal() {
-            if (!currentQuestion) return;
-
-            document.getElementById('questionSubjectBadge').innerText = currentQuestion.subjectName;
-            document.getElementById('questionTopicBadge').innerText = currentQuestion.topic;
-            document.getElementById('questionText').innerText = currentQuestion.question;
-
-            const container = document.getElementById('optionsContainer');
-            container.innerHTML = '';
-
-            currentQuestion.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left p-3.5 rounded-xl bg-slate-900/90 border border-slate-700/80 hover:border-brandCyan hover:bg-slate-800/90 transition text-sm font-semibold text-slate-200 flex items-center justify-between group";
-                btn.innerHTML = `
-                    <span>${opt}</span>
-                    <i class="fa-solid fa-chevron-right text-xs opacity-0 group-hover:opacity-100 text-brandCyan transition"></i>
-                `;
-                btn.onclick = () => submitAnswer(idx);
-                container.appendChild(btn);
-            });
-
-            document.getElementById('questionModal').classList.remove('hidden');
-
-            // Start Timer
-            timeLeft = timePerQuestion;
-            document.getElementById('timerText').innerText = `${timeLeft}s`;
-
-            if (timerInterval) clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                document.getElementById('timerText').innerText = `${timeLeft}s`;
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    handleTimeOut();
-                }
-            }, 1000);
-        }
-
-        function submitAnswer(selectedIndex) {
-            if (timerInterval) clearInterval(timerInterval);
-            document.getElementById('questionModal').classList.add('hidden');
-
-            const isCorrect = (selectedIndex === currentQuestion.correct);
-
-            if (isCorrect) {
-                // CORRECT
-                sound.playCorrect();
-                sound.playLaser();
-
-                // Fire laser animation
-                lasers.push({ x: player.x + 35, y: player.y + 32, speed: 18 });
-
-                // Particles on Zombie
-                if (zombies[0]) {
-                    createExplosion(zombies[0].x, zombies[0].y, '#00B4DB');
-                }
-
-                score += (selectedDiff === 'hard' ? 20 : selectedDiff === 'medium' ? 15 : 10);
-                correctAnswersCount++;
-                currentQuestionIndex++;
-
-                updateHUD();
-
-                // Remove zombie and spawn next
-                setTimeout(() => {
-                    zombies = [];
-                    spawnNextZombie();
-                }, 400);
-
-            } else {
-                // WRONG ANSWER
-                sound.playWrong();
-                sound.playZombieBite();
-                takeDamage();
-            }
-        }
-
-        function handleTimeOut() {
-            document.getElementById('questionModal').classList.add('hidden');
-            sound.playWrong();
-            sound.playZombieBite();
-            takeDamage();
-        }
-
-        function takeDamage() {
-            lives--;
-            updateHUD();
-
-            // Flash Screen Red
-            const app = document.getElementById('appContainer');
-            app.classList.add('border-red-600', 'bg-red-950/30');
-            setTimeout(() => {
-                app.classList.remove('border-red-600', 'bg-red-950/30');
-            }, 400);
-
-            // Explosion/Damage particles
-            createExplosion(player.x, player.y, '#FF0055');
-
-            if (lives <= 0) {
-                triggerGameOver();
-            } else {
-                currentQuestionIndex++;
-                zombies = [];
-                setTimeout(() => {
-                    spawnNextZombie();
-                }, 600);
-            }
-        }
-
-        function createExplosion(x, y, color) {
-            for (let i = 0; i < 20; i++) {
-                particles.push({
-                    x: x + 20,
-                    y: y + 20,
-                    vx: (Math.random() - 0.5) * 8,
-                    vy: (Math.random() - 0.5) * 8,
-                    radius: Math.random() * 4 + 2,
-                    color: color,
-                    alpha: 1.0
+            if (isCorrect && activeQuestionZombie) {
+                // Shoot Bullet at Zombie
+                bullets.push({
+                    x: player.x + 30,
+                    y: player.y,
+                    speed: 12,
+                    targetZombie: activeQuestionZombie
                 });
-            }
-        }
 
-        function triggerGameOver() {
-            gameRunning = false;
-            document.getElementById('gameHud').classList.add('hidden');
-
-            document.getElementById('resultIcon').innerHTML = `<i class="fa-solid fa-skull-crossbones text-red-500"></i>`;
-            document.getElementById('resultTitle').innerText = "GAME OVER - ZOMBIE ĂN THỊT";
-            document.getElementById('resultTitle').className = "font-game text-3xl sm:text-4xl font-black text-red-500 uppercase tracking-wide mb-2";
-            document.getElementById('resultSubtitle').innerText = "Rất tiếc! Bạn đã bị Zombie tiếp cận. Hãy ôn luyện lại kiến thức cùng Thầy Thái Đà Lạt nhé!";
-
-            fillResultDetails();
-            document.getElementById('resultScreen').classList.remove('hidden');
-        }
-
-        function triggerVictory() {
-            gameRunning = false;
-            document.getElementById('gameHud').classList.add('hidden');
-
-            document.getElementById('resultIcon').innerHTML = `<i class="fa-solid fa-trophy text-yellow-400 animate-bounce"></i>`;
-            document.getElementById('resultTitle').innerText = "CHIẾN THẮNG RỰC RỠ!";
-            document.getElementById('resultTitle').className = "font-game text-3xl sm:text-4xl font-black text-yellow-400 uppercase tracking-wide mb-2";
-            document.getElementById('resultSubtitle').innerText = "Chúc mừng em đã tiêu diệt toàn bộ Zombie và bảo vệ thành công phòng thí nghiệm KHTN 6!";
-
-            fillResultDetails();
-            document.getElementById('resultScreen').classList.remove('hidden');
-        }
-
-        function fillResultDetails() {
-            document.getElementById('finalScore').innerText = score;
-            document.getElementById('finalCorrect').innerText = `${correctAnswersCount} / ${activeQuestions.length}`;
-
-            const percent = (correctAnswersCount / activeQuestions.length) * 100;
-            let rankText = "";
-            let teacherText = "";
-
-            if (percent >= 90) {
-                rankText = "THẦN ĐỒNG KHOA HỌC THẦY THÁI (Xuất Sắc)";
-                teacherText = "Tuyệt vời! Em nắm rất chắc toàn bộ kiến thức Khoa học tự nhiên 6. Sẵn sàng bứt phá điểm 10 kiểm tra HK1!";
-            } else if (percent >= 70) {
-                rankText = "HỌC SINH KHÁ - GIỎI KHTN";
-                teacherText = "Kết quả rất tốt! Hãy xem lại một vài câu còn sót để đạt điểm số tuyệt đối trong kỳ thi sắp tới nhé!";
-            } else if (percent >= 50) {
-                rankText = "ĐẠT YÊU CẦU - CẦN CỐ GẮNG THÊM";
-                teacherText = "Em đã đạt mức cơ bản. Hãy dành thời gian ôn lại các khái niệm quan trọng cùng Thầy Thái nhé!";
+                score += (currentDifficulty === "easy" ? 10 : currentDifficulty === "medium" ? 20 : 30);
+                correctAnswersCount++;
+                updateHUD();
             } else {
-                rankText = "CẦN ÔN TẬP LẠI KIẾN THỨC";
-                teacherText = "Đừng nản lòng! Hãy đăng ký thêm buổi ôn tập tại Lớp Khoa Học Tự Nhiên Thầy Thái Đà Lạt (Hotline: 086 2008 917) để vững tin hơn nhé!";
+                // Wrong answer penalty: Zombie speeds up!
+                if (activeQuestionZombie) {
+                    activeQuestionZombie.speed += 1.0;
+                    activeQuestionZombie.color = "#e76f51";
+                }
             }
-
-            document.getElementById('finalRank').innerText = rankText;
-            document.getElementById('teacherComment').innerText = teacherText;
+            activeQuestionZombie = null;
         }
 
-        function restartGame() {
-            startGame();
+        // Helpers
+        function getSubjectName(sub) {
+            switch(sub) {
+                case "physics": return "VẬT LÝ 6";
+                case "chemistry": return "HÓA HỌC 6";
+                case "biology": return "SINH HỌC 6";
+                default: return "TỔNG HỢP KHTN 6";
+            }
         }
 
-        function showStartScreen() {
+        function updateHUD() {
+            document.getElementById("score-val").innerText = score;
+            document.getElementById("subject-val").innerText = getSubjectName(currentSubject);
+            
+            let hearts = "";
+            for (let i = 0; i < lives; i++) hearts += "❤️";
+            document.getElementById("lives-val").innerText = hearts || "💀";
+        }
+
+        // Start Game
+        document.getElementById("start-btn").addEventListener("click", function() {
+            currentSubject = document.getElementById("subject-select").value;
+            currentDifficulty = document.getElementById("difficulty-select").value;
+
+            score = 0;
+            lives = 3;
+            correctAnswersCount = 0;
+            activeZombies = [];
+            bullets = [];
+            gameRunning = true;
+
+            document.getElementById("start-screen").classList.add("hidden");
+            document.getElementById("game-over-screen").classList.add("hidden");
+            document.getElementById("hud").classList.remove("hidden");
+
+            updateHUD();
+            resizeCanvas();
+
+            // Clear previous timers
+            if (spawnTimer) clearInterval(spawnTimer);
+            spawnTimer = setInterval(spawnZombie, diffConfig[currentDifficulty].interval);
+
+            // Initial Spawn
+            spawnZombie();
+
+            // Run Loop
+            animate();
+        });
+
+        // Restart Game
+        document.getElementById("restart-btn").addEventListener("click", function() {
+            document.getElementById("game-over-screen").classList.add("hidden");
+            document.getElementById("start-screen").classList.remove("hidden");
+        });
+
+        // End Game
+        function endGame() {
             gameRunning = false;
-            document.getElementById('resultScreen').classList.add('hidden');
-            document.getElementById('gameHud').classList.add('hidden');
-            document.getElementById('startScreen').classList.remove('hidden');
+            clearInterval(spawnTimer);
+
+            document.getElementById("hud").classList.add("hidden");
+            document.getElementById("game-over-screen").classList.remove("hidden");
+            document.getElementById("final-score").innerText = score + " ĐIỂM";
+            
+            const diffText = currentDifficulty === "easy" ? "Chậm" : currentDifficulty === "medium" ? "Vừa" : "Nhanh";
+            document.getElementById("final-stats").innerHTML = `
+                Số câu trả lời đúng: <b>${correctAnswersCount}</b> câu<br>
+                Mức độ: <b>${diffText}</b> | Phân môn: <b>${getSubjectName(currentSubject)}</b>
+            `;
         }
     </script>
 </body>
